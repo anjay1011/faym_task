@@ -13,13 +13,23 @@ lib/
     └── collections_screen.dart  # Main screen with accordion logic and UI
 ```
 
-### File Descriptions
+## Approach
 
-| File | Purpose |
-|------|---------|
-| main.dart | Initializes the app with theme configuration and routes to CollectionsScreen |
-| collection.dart | Data model class with title and imageUrls fields |
-| collections_screen.dart | Stateful widget containing accordion state management, card UI, and image row with +N overlay |
+### State Management
+- Used StatefulWidget with a single `expandedIndex` variable to track which collection is expanded
+- `expandedIndex = -1` means no collection is expanded
+- Tapping a card updates `expandedIndex` via `setState()`, ensuring only one collection is expanded at a time
+
+### Accordion Animation
+- Used `AnimatedCrossFade` widget for smooth expand/collapse transitions
+- Animation duration: 300 milliseconds
+- `CrossFadeState.showFirst` displays collapsed state (empty SizedBox)
+- `CrossFadeState.showSecond` displays expanded state (horizontal image row)
+
+### +N Overlay Logic
+- Maximum 4 images displayed in the horizontal row
+- If more images exist, a "+N" overlay appears on the last visible image
+- Implemented using `Stack` widget with a semi-transparent `Container` overlay
 
 ## How to Run
 
